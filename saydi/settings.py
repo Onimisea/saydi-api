@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Third Party Apps
     'django_crontab',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
