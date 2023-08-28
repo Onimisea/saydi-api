@@ -147,5 +147,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRONJOBS = [
-    ('* * * * *', 'cron_jobs.task.pull_from_github'),  # Every minute
+    ('*/5 * * * *', 'cron_jobs.task.pull_from_github'),  # Every 5 minute
 ]
