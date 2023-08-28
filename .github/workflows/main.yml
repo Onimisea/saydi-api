@@ -19,4 +19,4 @@ jobs:
           server: https://saydi.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: https://api.saydi.org
+          server-dir: /https://api.saydi.org/
