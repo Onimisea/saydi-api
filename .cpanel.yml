@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/sayduntb/api.saydi.org/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp * $DEPLOYPATH
