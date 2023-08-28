@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    'cron_jobs',
+
+
+    # Third Party Apps
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +144,7 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CRONJOBS = [
+    ('* * * * *', 'cron_jobs.task.pull_from_github'),  # Every minute
+]
