@@ -1,0 +1,51 @@
+# This workflow will build and push a Python Django application to cPanel when a commit is pushed to your default branch.
+#
+# This workflow assumes you have already created the target cPanel web application.
+
+name: Build and deploy Python Django app to cPanel
+
+env:
+  AZURE_WEBAPP_NAME: "api.saydi.org"  # set this to the name of your Azure Web App
+  PYTHON_VERSION: '3.9.16'              # set this to the Python version to use
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  FTP-Deploy-Action:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Create and start virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Make Migrations
+        run: python manage.py makemigrations
+
+      - name: Migrate
+        run: python manage.py migrate
+
+      - name: 📂 Sync folders and files to the server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          
+
