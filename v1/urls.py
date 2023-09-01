@@ -8,4 +8,6 @@ urlpatterns = [
     path("newsletter/", include("newsletter.urls")),
     path("contacts/", include("contacts.urls")),
     path("volunteers/", include("volunteers.urls")),
+    path("contents/", include("contents.urls")),
+    path("comments/", include("comments.urls")),
 ]

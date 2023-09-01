@@ -1,7 +1,21 @@
 from rest_framework import serializers
-from .models import VolunteeringApplication
+from .models import Content
+from comments.models import Comment
 
-class VolunteeringApplicationSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = VolunteeringApplication
-        fields = ['firstname', 'lastname', 'gender', 'email', 'state', 'lga', 'areas_of_interest', 'professional_background',  'how_you_find_us', ]
+        model = Comment
+        fields = '__all__'
+
+class RelatedContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Content
+        fields = ('title', 'slug', 'published')
+
+class ContentSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
+    related_contents = RelatedContentSerializer(many=True, read_only=True, source='get_related_contents')
+
+    class Meta:
+        model = Content
+        fields = '__all__'

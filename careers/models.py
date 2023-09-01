@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.utils.text import slugify 
+from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -12,6 +13,7 @@ class JobPosting(models.Model):
     description = RichTextUploadingField()
     requirements = RichTextUploadingField()
     application_deadline = models.DateTimeField()
+    featured_image = CloudinaryField(format="jpg", folder="JobPostingGraphics", verbose_name="Job Posting Graphic", default="")
     application_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
 

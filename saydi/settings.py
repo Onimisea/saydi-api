@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "v1",
     "careers",
     "volunteers",
+    "comments",
 
     "rest_framework",
     "corsheaders",
@@ -191,9 +192,15 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# CRONJOBS = [
-#     ('*/5 * * * *', 'cron_jobs.task.pull_from_github'),  # Every 5 minute
-# ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Adjust this for your needs
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
 
 
 CORS_ALLOW_ALL_ORIGINS: False

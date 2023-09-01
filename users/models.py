@@ -50,8 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(
         max_length=255, verbose_name="Email Address", null=False, blank=False, unique=True)
 
-    profile_image = CloudinaryField(format="jpg", folder="AdminProfileImages", verbose_name="Admin Profile Image", null=True, blank=True
-                                    )
+    profile_image = CloudinaryField(format="jpg", folder="AdminProfileImages", verbose_name="Admin Profile Image", null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
