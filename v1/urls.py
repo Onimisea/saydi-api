@@ -9,4 +9,6 @@ urlpatterns = [
     path("volunteers/", include("volunteers.urls")),
     path("contents/", include("contents.urls")),
     path("comments/", include("comments.urls")),
+    path("webhooks/", include("webhooks.urls")),
+    path("donations/", include("donations.urls")),
 ]
