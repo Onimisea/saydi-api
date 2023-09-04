@@ -24,6 +24,7 @@ class JobPosting(models.Model):
     class Meta:
         verbose_name = "Job Post"
         verbose_name_plural = "Job Posts"
+        ordering = ['-created_at']
 
 
     def save(self, *args, **kwargs):

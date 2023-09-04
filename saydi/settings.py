@@ -58,7 +58,8 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["http://localhost:3000", "http://localhost:8000", "127.0.0.1", "http://saydi.org/", "https://saydi.org/", "af80-102-89-42-44.ngrok-free.app"]
+ALLOWED_HOSTS = ["http://localhost:3000", "http://localhost:8000", "127.0.0.1", "saydi.org",
+                 "http://saydi.org/", "https://saydi.org/", "af80-102-89-42-44.ngrok-free.app"]
 
 
 # Application definition
@@ -173,7 +174,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Africa/Lagos"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -224,6 +225,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://saydi.org",
+    "http://saydi.org",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -231,6 +234,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://saydi.org",
+    "http://saydi.org",
 ]
 
 CORS_ALLOW_METHODS = [

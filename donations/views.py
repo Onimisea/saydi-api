@@ -24,8 +24,8 @@ plans = {
     "annually": "PLN_l920yjb71pser2f",
 }
 
-success_url = "http://127.0.0.1:8000/"
-cancel_url = "http://127.0.0.1:8000/cancelled/"
+success_url = "https://saydi.org/"
+cancel_url = "https://saydi.org/?error=failed"
 
 
 class CreateDonationView(APIView):
@@ -102,6 +102,7 @@ class CreateDonationView(APIView):
                             'email': donation.email,
                             'amount': int(donation.amount) * 100,
                             'plan': plan,
+                            'callback_url': success_url,
                             'metadata': metadata
                         }
 
@@ -126,6 +127,7 @@ class CreateDonationView(APIView):
                         'email': donation.email,
                         'amount': int(donation.amount) * 100,
                         'plan': plan,
+                        'callback_url': success_url,
                         'metadata': metadata
                     }
 

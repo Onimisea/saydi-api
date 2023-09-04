@@ -11,4 +11,5 @@ urlpatterns = [
     path("comments/", include("comments.urls")),
     path("webhooks/", include("webhooks.urls")),
     path("donations/", include("donations.urls")),
+    path("careers/", include("careers.urls")),
 ]

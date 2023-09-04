@@ -3,6 +3,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
+import PyPDF2
+
 
 class Content(models.Model):
     CONTENT_TYPE_CHOICES = (
@@ -20,8 +22,10 @@ class Content(models.Model):
     content = RichTextUploadingField()
     summary = RichTextUploadingField()
     location = models.CharField(max_length=100, null=True, blank=True)
-    featured_image = CloudinaryField(format="jpg", folder="ContentFeaturedImages", verbose_name="Featured Image")
-    featured_document = CloudinaryField(format="pdf", folder="Reports", verbose_name="PDF Report", null=True, blank=True)
+    featured_image = CloudinaryField(
+        format="jpg", folder="ContentFeaturedImages", verbose_name="Featured Image", null=True, blank=True)
+    featured_document = CloudinaryField(
+        format="pdf", folder="Reports", verbose_name="PDF Report", resource_type="raw", null=True, blank=True)
     # download_link = models.URLField(null=True, blank=True)
     audit_date = models.DateTimeField(null=True, blank=True)
     published = models.DateTimeField()
@@ -29,17 +33,20 @@ class Content(models.Model):
 
     def clean(self):
         # Check the content type and validate fields accordingly
+        super().clean()
+
         if self.type == 'press_release':
             # Example: Press releases require a download link
             if not self.location:
                 raise ValidationError("Location of press release is required.")
-        elif self.type == 'annual_report' and self.type == 'financial_report':
-            # Example: Policy briefs require a summary
+        elif self.type == 'annual_report' or self.type == 'financial_report':
             if not self.featured_document:
-                raise ValidationError("Reports require a featured PDF document.")
+                raise ValidationError(
+                    "Reports require a featured PDF document.")
         elif self.type == 'financial_report':
             if not self.audit_date:
-                raise ValidationError("Financial Reports require an audit date")
+                raise ValidationError(
+                    "Financial Reports require an audit date")
         # Add similar checks for other content types
 
     def save(self, *args, **kwargs):
@@ -50,7 +57,7 @@ class Content(models.Model):
 
     def __str__(self):
         return f"{self.type}: {self.title} - {self.published}"
-    
+
     def get_related_contents(self):
         # Retrieve related contents of the same type (excluding the current content)
         return Content.objects.filter(type=self.type).exclude(pk=self.pk)
