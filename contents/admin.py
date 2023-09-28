@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Content
+from ckeditor.widgets import CKEditorWidget
+from django.db import models
 
 
 class ContentAdmin(admin.ModelAdmin):
@@ -9,6 +11,17 @@ class ContentAdmin(admin.ModelAdmin):
     # Prepopulate slug based on title
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'published'  # Enable date-based drilldown navigation
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditorWidget},
+    }
+
+    class Media:
+        js = (
+            # Include Cloudinary uploader script
+            'https://upload-widget.cloudinary.com/global/all.js',
+            # Include your CKEditor Cloudinary uploader plugin
+            '../static/ckeditor/ckeditor/plugins/cloudinaryuploader/plugin.js',
+        )
 
 
 admin.site.register(Content, ContentAdmin)

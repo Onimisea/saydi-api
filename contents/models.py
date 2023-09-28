@@ -5,7 +5,6 @@ from cloudinary.models import CloudinaryField
 from django.core.exceptions import ValidationError
 
 
-
 class Content(models.Model):
     CONTENT_TYPE_CHOICES = (
         ('press_release', 'Press Release'),
@@ -66,6 +65,6 @@ class Content(models.Model):
     def get_related_contents(self):
         # Retrieve related contents of the same type (excluding the current content)
         return Content.objects.filter(type=self.type).exclude(pk=self.pk)
-        
+
     class Meta:
         ordering = ['-published']

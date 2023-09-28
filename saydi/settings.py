@@ -174,7 +174,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Lagos"
 
 USE_I18N = True
 
@@ -267,10 +267,11 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-
+        'toolbar': 'Custom',  # put selected toolbar config here
         'toolbar_Custom': [
 
             {'name': 'basicstyles',
@@ -281,7 +282,7 @@ CKEDITOR_CONFIGS = {
                        'Language']},
             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
             {'name': 'insert',
-             'items': ['Image', 'Youtube', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+             'items': ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
             '/',
             {'name': 'styles', 'items': [
                 'Styles', 'Format', 'Font', 'FontSize']},
@@ -289,18 +290,15 @@ CKEDITOR_CONFIGS = {
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
             {'name': 'about', 'items': ['CodeSnippet']},
             {'name': 'about', 'items': ['About']},
+            {'name': 'CloudinaryUploader', 'items': ['CloudinaryUploader']},
             '/',  # put this to force next toolbar on new line
-            {'name': 'yourcustomtools', 'items': [
-                # put the name of your editor.ui.addButton here
-                'Preview',
-                'Maximize',
+            # Update the button name to match your plugin command.
 
-            ]},
         ],
-        'toolbar': 'Custom',  # put selected toolbar config here
+
         'toolbarGroups': [{'name': 'document', 'groups': ['mode', 'document', 'doctools']}],
-        'height': 400,
-        # 'width': '100%',
+        'height': '400px',
+        'width': '100%',
         'filebrowserWindowHeight': 725,
         'filebrowserWindowWidth': 940,
         'toolbarCanCollapse': True,
@@ -322,8 +320,7 @@ CKEDITOR_CONFIGS = {
             'dialogui',
             'elementspath',
             'codesnippet',
+            'cloudinaryuploader',
         ]),
     }
 }
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
