@@ -10,7 +10,6 @@ class ContentAdmin(admin.ModelAdmin):
     search_fields = ('id', 'title', 'summary', 'slug', 'location')
     # Prepopulate slug based on title
     prepopulated_fields = {'slug': ('title',)}
-    date_hierarchy = 'published'  # Enable date-based drilldown navigation
     formfield_overrides = {
         models.TextField: {'widget': CKEditorWidget},
     }
